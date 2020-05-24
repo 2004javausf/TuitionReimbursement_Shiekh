@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ahmad Co</title>
+</head>
+<body>
+
+	<div>
+		<h1>Welcome</h1>
+		<form action="vg.html"> 
+	<label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password" name="psw" required>
+       
+      <button  type="submit" onclick="checkpassword()">Login</button>
+      </form>
+		<form action="vg.html">
+			<input type="submit" value="Request a Form"/>
+		</form>
+		<form action="supervisor.html">
+			<input type="submit" value="Login as a Supervisor" onclick="checkpassword()"/>
+		</form>
+		
+	</div>
+	<script type="text/javascript" src="vg.js"></script>
+	
+</body>
+</html>
