@@ -39,4 +39,24 @@
     <servlet-name>GetRequestServlet</servlet-name>
     <url-pattern>/grs</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EventServlet</display-name>
+    <servlet-name>EventServlet</servlet-name>
+    <servlet-class>com.servlet.EventServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventServlet</servlet-name>
+    <url-pattern>/event</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GradingServlet</display-name>
+    <servlet-name>GradingServlet</servlet-name>
+    <servlet-class>com.servlet.GradingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GradingServlet</servlet-name>
+    <url-pattern>/grading</url-pattern>
+  </servlet-mapping>
 </web-app>

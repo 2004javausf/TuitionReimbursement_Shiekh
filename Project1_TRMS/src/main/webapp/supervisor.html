@@ -3,15 +3,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Direct Supervisor</title>
+<style>
+	th, td, p, input, h3 {
+		font:15px 'Segoe UI';
+	}
+	table, th, td {
+		border: solid 1px #ddd;
+		border-collapse: collapse;
+		padding: 3px 10px ;
+		text-align: center;
+	}
+	th {
+		font-weight:bold;
+	}
+</style>
 </head>
 <body>
 
 	<div>
 	<input type="text" id="requestForm" placeholder="Enter Employee ID">
 	<input type="submit" value="Get Requests" id="getForm">
-	<table id="viewRequests">
-	</table>
-	<h2 id="empName"></h2>
+	<p id='showData'></p>
+	
 	
 	</div>
 	<script type="text/javascript" src="requests.js"></script>

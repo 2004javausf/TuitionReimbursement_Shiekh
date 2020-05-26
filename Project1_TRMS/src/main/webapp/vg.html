@@ -19,24 +19,13 @@
 		<br>
 		Cost: <input type="number" id="cost" name="cost">
 		<br>
-		Grading Format:<br>
-		<input type="radio" id="gradingPass" name="gradingFormat" value="Percentage">
- 		 <label for="gradingPass">Percentage</label><br>
- 		 <input type="radio" id="gradingPresentation" name="gradingFormat" value="Presentation">
- 		 <label for="gradingPresentation">Presentation</label><br>
- 		Type of Event:<br>
- 		<input type="radio" id="course" name="event" value="University Course">
- 		 <label for="course">University Courses</label><br>
- 		 <input type="radio" id="seminars" name="event" value="Seminars">
- 		 <label for="seminars">Seminars</label><br>
- 		 <input type="radio" id="cps" name="event" value="Certification Preparation Classes">
- 		 <label for="cps">Certification Preparation Classes</label><br>
- 		 <input type="radio" id="certificate" name="event" value="Certification">
- 		 <label for="certificate">Certification</label><br>
- 		 <input type="radio" id="tech" name="event" value="Technical Training">
- 		 <label for="tech">Technical Training</label><br>
- 		 <input type="radio" id="others" name="event" value="Others">
- 		 <label for="others">Others</label><br>
+		Grading Format : <select name="gradingFormat" id="gradingFormat">
+                    <option value=0>SELECT</option>
+                  </select><br>
+ 		Type of Event : <select name="event" id="event">
+                    <option value=0>SELECT</option>
+                  </select>
+                <br>
 		<input type="submit" name="submitme" id="vgFormSubmit">
 		</form>
 	</div>
