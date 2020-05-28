@@ -11,12 +11,25 @@ import java.util.List;
 import com.beans.Event;
 import com.beans.Form;
 import com.beans.Grading;
+import com.beans.Login;
 import com.util.ConnFactory;
 
 public class VGDAOImpl {
 	public static ConnFactory banana= ConnFactory.getInstance();
 	
 //	//get specific
+	
+	public Login getLoginByName(String name) throws SQLException{
+		Login ln=null;
+		Connection conn= banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME= '"+name+"'");
+		while(rs.next()) {
+			ln=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+		}
+		return ln;
+	}
+	
 	public Form getRequestByID(int id) throws SQLException{
 		Form fm=null;
 		Connection conn= banana.getConnection();
@@ -28,11 +41,11 @@ public class VGDAOImpl {
 		return fm;
 	}
 	
-	public List<Form> getRequestsList() throws Exception {
+	public List<Form> getRequestsList(int id) throws Exception {
 		 List<Form> requestList= new ArrayList<Form>();
 		 Connection conn=banana.getConnection();
 			Statement stmt=conn.createStatement();
-			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE");
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID="+id);
 			Form s=null;
 			while(rs.next()) { 
 			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6));  
@@ -79,5 +92,19 @@ public class VGDAOImpl {
 			gradingList.add(grading);
 		}
 		return gradingList;
+	}
+	
+	public List<Login> getLogInUser() throws SQLException {
+		List<Login> loginList=new ArrayList<Login>();
+		Login login=null;
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+
+		ResultSet rs=stmt.executeQuery("SELECT * FROM EMPLOYEE");
+		while(rs.next()) {
+			login=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+			loginList.add(login);
+		}
+		return loginList;
 	}
 }

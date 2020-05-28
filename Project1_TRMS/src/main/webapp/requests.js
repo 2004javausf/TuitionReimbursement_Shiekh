@@ -1,10 +1,16 @@
 window.onload= function(){
+	console.log("in load");
+
+	this.getLogin();
+	
+	
     console.log("in onload");
     document.getElementById("getForm").addEventListener("click",getRequests,false);
+    
 }
 function getRequests(){
 console.log("in get requests");
-//let formID=document.getElementById("requestForm").value;
+let formID=document.getElementById("requestForm").value;
 var	xhrr= new XMLHttpRequest();
 xhrr.onreadystatechange= function(){
   console.log( "in ORSC "+xhrr.readyState);
@@ -15,7 +21,7 @@ xhrr.onreadystatechange= function(){
       loadTable(fm);
   }
 }
-xhrr.open("GET","http://localhost:8080/Project1_TRMS/grs?formID=" ,true);
+xhrr.open("GET","http://localhost:8080/Project1_TRMS/grs?formID="+formID ,true);
 
 xhrr.send();
 }
@@ -55,4 +61,33 @@ function loadTable(er){
         var divShowData = document.getElementById('showData');
         divShowData.innerHTML = "";
         divShowData.appendChild(table);
+}
+
+function getLogin(){
+    console.log("in getLogin");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange=function(){
+        console.log("in ORSC"+xhr.readyState);
+        if(xhr.readyState==4 && xhr.status==200){
+            console.log(xhr.responseText);
+           var emp=JSON.parse(xhr.responseText);
+            console.log(emp);
+            loadLogin(emp);
+        }
+    }
+    xhr.open("GET","http://localhost:8080/Project1_TRMS/login",true);
+
+    xhr.send();
+}
+
+function loadLogin(emp){
+	
+	var emp = emp;
+	console.log(emp);
+
+    document.getElementById("eID").innerHTML=emp.employeeID;
+   document.getElementById("fname").innerHTML=emp.employeeName;
+
+
 }

@@ -67,6 +67,7 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 		return date;
 	}
 	public void setDate(Date date) {
+		
 		this.date = date;
 	}
 //	public Time getTime() {
