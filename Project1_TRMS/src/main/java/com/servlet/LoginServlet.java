@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 			if(l==1) {
 				HttpSession session=request.getSession();
 				session.setAttribute("login",login);
-				request.getRequestDispatcher("vg.html").include(request, response);
+				request.getRequestDispatcher("Employee.html").include(request, response);
 			}
 			else if(l==2) {
 				HttpSession session=request.getSession();

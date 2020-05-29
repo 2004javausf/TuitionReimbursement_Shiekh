@@ -10,7 +10,7 @@ public class Form {
 	private int cost;
 	private String gradingFormat;
 	private String event;
-//	private double projectedReimbursement;
+	private double projectedReimbursement;
 	private String description;
 	private String justification;
 	private String status;
@@ -20,7 +20,7 @@ public class Form {
 	}
 	
 	
-public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String description,String justification) {
+public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String description,String justification,double projectedReimbursement) {
 		super();
 		this.formID = formID;
 		this.empName = empName;
@@ -30,7 +30,7 @@ public Form(int formID, String empName, Date date, int cost, String gradingForma
 		this.event = event;
 		this.description = description;
 		this.justification = justification;
-//		this.projectedReimbursement = projectedReimbursement;
+		this.projectedReimbursement = projectedReimbursement;
 	}
 public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String status,String description,String justification ) {
 	super();
@@ -101,14 +101,14 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 		this.date = date;
 	}
 	
-//	public double getProjectedReimbursement() {
-//		return projectedReimbursement;
-//	}
-//
-//
-//	public void setProjectedReimbursement(double projectedReimbursement) {
-//		this.projectedReimbursement = projectedReimbursement;
-//	}
+	public double getProjectedReimbursement() {
+		return projectedReimbursement;
+	}
+
+
+	public void setProjectedReimbursement(double projectedReimbursement) {
+		this.projectedReimbursement = projectedReimbursement;
+	}
 	
 	public int getCost() {
 		return cost;

@@ -9,8 +9,8 @@ window.onload= function(){
     document.getElementById("vgFormSubmit").addEventListener("click",postVG,false);
     
 
- //   document.getElementById("event").addEventListener("change",calculateRP,false);
-   // document.getElementById("cost").addEventListener("change",calculateRP,false);
+    document.getElementById("event").addEventListener("change",calculateRP,false);
+   document.getElementById("cost").addEventListener("change",calculateRP,false);
 }
 
 function getGF(){
@@ -98,20 +98,40 @@ function loadLogin(emp){
 //
 //}
 
-//function calculateRP(){
-//    var cost = document.getElementById("cost").value;
-//    console.log(cost);
-//    var sel = document.getElementById("event");
-//    if(sel.value != 0){
-//    	console.log(sel.value);
-//        var percent = et[(sel.value)-1].eventPercentage;
-//        console.log(percent);
-//        var pr = ((cost*percent)/100);
-//        console.log(pr);
-//
-//        document.getElementById("projectedReimbursement").value = pr;
-//    }
-//}
+function calculateRP(){
+	
+    var cost = document.getElementById("cost").value;
+    console.log(cost);
+    var sel = document.getElementById("event");
+    if(sel.value != 'SELECT'){
+    	var i=0;
+    	console.log(sel.value);
+    	if(sel.value=='UNIVERSITY COURSES'){
+    		i=0;
+    	}
+    	else if(sel.value=='SEMINARS'){
+    		i=1;
+    	}
+    	else if(sel.value=='CERTIFICATION PREPARATION CLASSES'){
+    		i=2;
+    	}
+    	else if(sel.value=='CERTIFICATION'){
+    		i=3;
+    	}
+    	else if(sel.value=='TECHNICAL TRAINING'){
+    		i=4;
+    	}
+    	else if(sel.value=='OTHERS'){
+    		i=5;
+    	}
+        var percent = et[i].eventPercentage;
+        console.log(percent);
+        var pr = ((cost*percent)/100);
+        console.log(pr);
+
+        document.getElementById("projectedReimbursement").value = pr;
+    }
+}
 
 
 function jsonBuilder(){

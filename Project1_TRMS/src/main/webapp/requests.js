@@ -1,10 +1,11 @@
 var emp;
 window.onload= function(){
 	console.log("in login load");
+//	 document.getElementById("reimbursements").addEventListener("click",getLogin,false);
 //	console.log(emp.employeeID);
 //	 document.getElementById("id").value=emp.employeeID;
 //	 document.getElementById("name").value=emp.employeeName;
-	this.getLogin();
+//	this.getLogin();
 	
     
 }
@@ -19,7 +20,7 @@ function getLogin(){
             emp=JSON.parse(xhr.responseText);
             console.log(emp);
             getRequests(emp);
-            loadLogin(emp);
+//            loadLogin(emp);
         }
     }
     xhr.open("GET","http://localhost:8080/Project1_TRMS/login",true);
@@ -27,15 +28,15 @@ function getLogin(){
     xhr.send();
 }
 
-function loadLogin(emp){
-	
-	console.log(emp);
-
-    document.getElementById("eID").innerHTML=emp.employeeID;
-   document.getElementById("fname").innerHTML=emp.employeeName;
-
-
-}
+//function loadLogin(emp){
+//	
+//	console.log(emp);
+//
+//    document.getElementById("eID").innerHTML=emp.employeeID;
+//   document.getElementById("fname").innerHTML=emp.employeeName;
+//
+//
+//}
 function getRequests(emp){
 	console.log(emp.employeeID);
 console.log("in get requests");
@@ -57,7 +58,9 @@ xhrr.send();
 }
 function loadTable(er){
     var col = [];
+    console.log(er.length);
     for (var c = 0; c < er.length; c++) {
+    	
         for (var key in er[c]) {
             if (col.indexOf(key) === -1) {
                 col.push(key);
@@ -71,6 +74,9 @@ function loadTable(er){
         var tr = table.insertRow(-1);                   // table row.
 
         for (var h = 0; h < col.length; h++) {
+        	if (h==6){
+        		continue;
+        	}
             var th = document.createElement("th");      // table header.
             th.innerHTML = col[h];
             tr.appendChild(th);
@@ -82,6 +88,9 @@ function loadTable(er){
             tr = table.insertRow(-1);
 
             for (var j = 0; j < col.length; j++) {
+            	if (j==6){
+            		continue;
+            	}
                 var tabCell = tr.insertCell(-1);
                 tabCell.innerHTML = er[i][col[j]];
             }

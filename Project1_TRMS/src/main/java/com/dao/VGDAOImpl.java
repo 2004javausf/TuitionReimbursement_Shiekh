@@ -32,17 +32,17 @@ public class VGDAOImpl {
 		return ln;
 	}
 	
-	public Form getRequestByID(int id) throws SQLException{
-		Form fm=null;
-		Connection conn= banana.getConnection();
-		Statement stmt=conn.createStatement();
-		ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID= "+id);
-		while(rs.next()) {
-			fm=new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
-		}
-		conn.close();
-		return fm;
-	}
+//	public Form getRequestByID(int id) throws SQLException{
+//		Form fm=null;
+//		Connection conn= banana.getConnection();
+//		Statement stmt=conn.createStatement();
+//		ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID= "+id);
+//		while(rs.next()) {
+//			fm=new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+//		}
+//		conn.close();
+//		return fm;
+//	}
 	
 	public List<Form> getRequestsList(int id) throws Exception {
 		 List<Form> requestList= new ArrayList<Form>();
