@@ -7,11 +7,12 @@ public class Login {
 	private String employeeHodStatus;
 	private String employeeBenco;
 	private String employeePassword;
+	private int supervisorID;
 	public Login() {
 		super();
 	}
 	public Login(int employeeID, String employeeName, String employeeDesignation, String employeeHodStatus,
-			String employeeBenco,String employeePassword) {
+			String employeeBenco,String employeePassword,int supervisorID) {
 		super();
 		this.employeeID = employeeID;
 		this.employeeName = employeeName;
@@ -19,6 +20,14 @@ public class Login {
 		this.employeeHodStatus = employeeHodStatus;
 		this.employeeBenco = employeeBenco;
 		this.employeePassword = employeePassword;
+		this.supervisorID = supervisorID;
+	}
+	
+	public int getSupervisorID() {
+		return supervisorID;
+	}
+	public void setSupervisorID(int supervisorID) {
+		this.supervisorID = supervisorID;
 	}
 	public int getEmployeeID() {
 		return employeeID;

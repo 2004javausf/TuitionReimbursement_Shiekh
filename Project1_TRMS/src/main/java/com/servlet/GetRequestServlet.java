@@ -17,7 +17,7 @@ public class GetRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("in doGet");
+		System.out.println("in doGet REQUESTS");
 		ObjectMapper mapper= new ObjectMapper();
 		VGDAOImpl vgdi= new VGDAOImpl();
 		int id= mapper.readValue(request.getParameter("formID"),Integer.class);

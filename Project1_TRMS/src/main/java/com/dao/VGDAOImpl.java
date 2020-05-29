@@ -26,7 +26,7 @@ public class VGDAOImpl {
 		Statement stmt=conn.createStatement();
 		ResultSet rs=stmt.executeQuery("SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME= '"+name+"'");
 		while(rs.next()) {
-			ln=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+			ln=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));
 		}
 		
 		return ln;
@@ -48,19 +48,22 @@ public class VGDAOImpl {
 		 List<Form> requestList= new ArrayList<Form>();
 		 Connection conn=banana.getConnection();
 			Statement stmt=conn.createStatement();
-			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID="+id);
+			System.out.println(id);
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE SUPERVISOR_ID="+id);
 			Form s=null;
 			while(rs.next()) { 
 			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
 			requestList.add(s);
 	}
+			System.out.println(requestList);
 			conn.close();
 		return requestList;
 	}
 	
 	public void insertForm(Form f) throws SQLException{
+		int mySupervisor= getSupervisorID(f.getFormID());
 		Connection conn= banana.getConnection();
-		String sql="INSERT INTO REIMBURSE (REIMBURSE_EMPLOYEE_ID,REIMBURSE_EMPLOYEE_NAME,REIMBURSE_COURSE_DATE,REIMBURSE_COST,REIMBURSE_GRADING_FORMAT,REIMBURSE_EVENT_TYPE,DESCRIPTION,JUSTIFICATION) VALUES(?,?,?,?,?,?,?,?)";
+		String sql="INSERT INTO REIMBURSE (REIMBURSE_EMPLOYEE_ID,REIMBURSE_EMPLOYEE_NAME,REIMBURSE_COURSE_DATE,REIMBURSE_COST,REIMBURSE_GRADING_FORMAT,REIMBURSE_EVENT_TYPE,DESCRIPTION,JUSTIFICATION,SUPERVISOR_ID) VALUES(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps= conn.prepareStatement(sql);
 		ps.setInt(1, f.getFormID());
 		ps.setString(2, f.getEmpName());
@@ -70,6 +73,7 @@ public class VGDAOImpl {
 		ps.setString(6, f.getEvent());
 		ps.setString(7, f.getDescription());
 		ps.setString(8, f.getJustification());
+		ps.setInt(9, mySupervisor );
 		ps.executeUpdate();
 		conn.close();
 	}
@@ -111,7 +115,7 @@ public class VGDAOImpl {
 
 		ResultSet rs=stmt.executeQuery("SELECT * FROM EMPLOYEE");
 		while(rs.next()) {
-			login=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+			login=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));
 			loginList.add(login);
 		}
 		conn.close();
@@ -124,12 +128,23 @@ public class VGDAOImpl {
 		List<MySupervisor> mySupervisorList = new ArrayList<MySupervisor>();
 		Connection conn = banana.getConnection();
 		Statement stmt=conn.createStatement();
-		ResultSet rs=stmt.executeQuery("SELECT * FROM MYSUPERVISOR WHERE EMPLOYEE_ID="+id);
+		ResultSet rs=stmt.executeQuery("SELECT * FROM MYSUPERVISOR WHERE SUPERVISOR_ID="+id);
 		while(rs.next()) {
 			mySupervisor=new MySupervisor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4));
 			mySupervisorList.add(mySupervisor);
 		}
 		conn.close();
 		return mySupervisorList;
+	}
+	public int getSupervisorID(int id) throws SQLException {
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		int mySupervisor = 0 ;
+		ResultSet rs=stmt.executeQuery("SELECT SUPERVISOR_ID FROM MYSUPERVISOR WHERE EMPLOYEE_ID="+id);
+		while(rs.next()) {
+			mySupervisor= rs.getInt(1);
+		}
+		return mySupervisor;
+	
 	}
 }

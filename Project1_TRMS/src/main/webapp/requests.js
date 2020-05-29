@@ -6,9 +6,6 @@ window.onload= function(){
 //	 document.getElementById("name").value=emp.employeeName;
 	this.getLogin();
 	
-	
-    console.log("in requests onload");
-    this.getRequests();
     
 }
 function getLogin(){

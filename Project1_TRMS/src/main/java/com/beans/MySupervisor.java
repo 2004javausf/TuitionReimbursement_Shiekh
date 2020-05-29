@@ -15,6 +15,11 @@ public class MySupervisor {
 		this.employeeName = employeeName;
 		SupervisorName = supervisorName;
 	}
+	
+	public MySupervisor(int supervisorID) {
+		super();
+		this.supervisorID = supervisorID;
+	}
 	public int getEmployeeID() {
 		return employeeID;
 	}
