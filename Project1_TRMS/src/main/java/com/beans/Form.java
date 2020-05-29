@@ -10,14 +10,17 @@ public class Form {
 	private int cost;
 	private String gradingFormat;
 	private String event;
-	
+//	private double projectedReimbursement;
+	private String description;
+	private String justification;
+	private String status;
 	
 	public Form() {
 		super();
 	}
 	
 	
-public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event) {
+public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String description,String justification) {
 		super();
 		this.formID = formID;
 		this.empName = empName;
@@ -25,7 +28,24 @@ public Form(int formID, String empName, Date date, int cost, String gradingForma
 		this.cost = cost;
 		this.gradingFormat = gradingFormat;
 		this.event = event;
+		this.description = description;
+		this.justification = justification;
+//		this.projectedReimbursement = projectedReimbursement;
 	}
+public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String status,String description,String justification ) {
+	super();
+	this.formID = formID;
+	this.empName = empName;
+	this.date = date;
+	this.cost = cost;
+	this.gradingFormat = gradingFormat;
+	this.event = event;
+	this.status= status;
+	this.description = description;
+	this.justification = justification;
+	
+//	this.projectedReimbursement = projectedReimbursement;
+}
 
 
 
@@ -51,6 +71,16 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 	}
 
 
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	public int getFormID() {
 		return formID;
 	}
@@ -70,15 +100,39 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 		
 		this.date = date;
 	}
-//	public Time getTime() {
-//		return time;
+	
+//	public double getProjectedReimbursement() {
+//		return projectedReimbursement;
 //	}
-//	public void setTime(Time time) {
-//		this.time = time;
+//
+//
+//	public void setProjectedReimbursement(double projectedReimbursement) {
+//		this.projectedReimbursement = projectedReimbursement;
 //	}
+	
 	public int getCost() {
 		return cost;
 	}
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getJustification() {
+		return justification;
+	}
+
+
+	public void setJustification(String justification) {
+		this.justification = justification;
+	}
+
+
 	public void setCost(int cost) {
 		this.cost = cost;
 	}

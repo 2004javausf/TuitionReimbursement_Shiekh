@@ -27,6 +27,7 @@ public class VGDAOImpl {
 		while(rs.next()) {
 			ln=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
 		}
+		
 		return ln;
 	}
 	
@@ -36,8 +37,9 @@ public class VGDAOImpl {
 		Statement stmt=conn.createStatement();
 		ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID= "+id);
 		while(rs.next()) {
-			fm=new Form(rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6));
+			fm=new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
 		}
+		conn.close();
 		return fm;
 	}
 	
@@ -48,15 +50,16 @@ public class VGDAOImpl {
 			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID="+id);
 			Form s=null;
 			while(rs.next()) { 
-			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6));  
+			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
 			requestList.add(s);
 	}
+			conn.close();
 		return requestList;
 	}
 	
 	public void insertForm(Form f) throws SQLException{
 		Connection conn= banana.getConnection();
-		String sql="INSERT INTO REIMBURSE (REIMBURSE_EMPLOYEE_ID,REIMBURSE_EMPLOYEE_NAME,REIMBURSE_COURSE_DATE,REIMBURSE_COST,REIMBURSE_GRADING_FORMAT,REIMBURSE_EVENT_TYPE) VALUES(?,?,?,?,?,?)";
+		String sql="INSERT INTO REIMBURSE (REIMBURSE_EMPLOYEE_ID,REIMBURSE_EMPLOYEE_NAME,REIMBURSE_COURSE_DATE,REIMBURSE_COST,REIMBURSE_GRADING_FORMAT,REIMBURSE_EVENT_TYPE,DESCRIPTION,JUSTIFICATION) VALUES(?,?,?,?,?,?,?,?)";
 		PreparedStatement ps= conn.prepareStatement(sql);
 		ps.setInt(1, f.getFormID());
 		ps.setString(2, f.getEmpName());
@@ -64,7 +67,10 @@ public class VGDAOImpl {
 		ps.setInt(4, f.getCost());
 		ps.setString(5, f.getGradingFormat());
 		ps.setString(6, f.getEvent());
+		ps.setString(7, f.getDescription());
+		ps.setString(8, f.getJustification());
 		ps.executeUpdate();
+		conn.close();
 	}
 	
 	public  List<Event> getET() throws SQLException {
@@ -77,6 +83,7 @@ public class VGDAOImpl {
 			event=new Event(rs.getInt(1),rs.getString(2),rs.getInt(3));
 			eventList.add(event);
 		}
+		conn.close();
 		return eventList;
 	}
 	
@@ -91,6 +98,7 @@ public class VGDAOImpl {
 			grading=new Grading(rs.getInt(1),rs.getString(2),rs.getString(3));
 			gradingList.add(grading);
 		}
+		conn.close();
 		return gradingList;
 	}
 	
@@ -105,6 +113,8 @@ public class VGDAOImpl {
 			login=new Login(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
 			loginList.add(login);
 		}
+		conn.close();
 		return loginList;
+		
 	}
 }

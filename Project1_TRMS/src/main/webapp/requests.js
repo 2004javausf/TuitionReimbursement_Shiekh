@@ -1,16 +1,47 @@
 window.onload= function(){
-	console.log("in load");
+	console.log("in login load");
 
 	this.getLogin();
 	
 	
-    console.log("in onload");
-    document.getElementById("getForm").addEventListener("click",getRequests,false);
+    console.log("in requests onload");
+    this.getRequests();
     
 }
-function getRequests(){
+function getLogin(){
+    console.log("in getLogin");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange=function(){
+        console.log("in ORSC"+xhr.readyState);
+        if(xhr.readyState==4 && xhr.status==200){
+            console.log(xhr.responseText);
+           var emp=JSON.parse(xhr.responseText);
+            console.log(emp);
+            getRequests(emp);
+            loadLogin(emp);
+        }
+    }
+    xhr.open("GET","http://localhost:8080/Project1_TRMS/login",true);
+
+    xhr.send();
+}
+
+function loadLogin(emp){
+	
+	var emp = emp;
+	console.log(emp);
+
+    document.getElementById("eID").innerHTML=emp.employeeID;
+   document.getElementById("fname").innerHTML=emp.employeeName;
+
+
+}
+function getRequests(emp){
+	console.log(emp.employeeID);
 console.log("in get requests");
-let formID=document.getElementById("requestForm").value;
+let formID=emp.employeeID;
+//let formID=document.getElementById("requestForm").value;
 var	xhrr= new XMLHttpRequest();
 xhrr.onreadystatechange= function(){
   console.log( "in ORSC "+xhrr.readyState);
@@ -63,31 +94,3 @@ function loadTable(er){
         divShowData.appendChild(table);
 }
 
-function getLogin(){
-    console.log("in getLogin");
-
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange=function(){
-        console.log("in ORSC"+xhr.readyState);
-        if(xhr.readyState==4 && xhr.status==200){
-            console.log(xhr.responseText);
-           var emp=JSON.parse(xhr.responseText);
-            console.log(emp);
-            loadLogin(emp);
-        }
-    }
-    xhr.open("GET","http://localhost:8080/Project1_TRMS/login",true);
-
-    xhr.send();
-}
-
-function loadLogin(emp){
-	
-	var emp = emp;
-	console.log(emp);
-
-    document.getElementById("eID").innerHTML=emp.employeeID;
-   document.getElementById("fname").innerHTML=emp.employeeName;
-
-
-}

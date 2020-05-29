@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.beans.Form;
-import com.beans.VideoGame;
 import com.dao.VGDAOImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class VGServlet extends HttpServlet {
@@ -26,8 +24,6 @@ public class VGServlet extends HttpServlet {
 		System.out.println("in doPost");
 		Form vg=null;
 		ObjectMapper mapper=new ObjectMapper();
-		//convert JSON to Java Object
-		//YOU NEED A DEFAULT CONSTRUCTOR IN YOUR JAVA OBJECT CLASS IN ORDER TO USE THIS!!!
 		vg=mapper.readValue(request.getInputStream(),Form.class);
 		System.out.println(vg);
 		VGDAOImpl vgdi=new VGDAOImpl();
@@ -37,7 +33,6 @@ public class VGServlet extends HttpServlet {
 			pw.write("<h3>Added A Request</h3>");
 			pw.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

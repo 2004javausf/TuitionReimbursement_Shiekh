@@ -66,3 +66,6 @@ function loadLogin(emp){
 //    document.getElementById("dept").innerHTML=emp.dept;
 
 }
+
+//<input type="text" id="requestForm" placeholder="Enter Employee ID">
+//<input type="submit" value="Get Requests" id="getForm">

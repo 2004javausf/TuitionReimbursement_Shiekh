@@ -1,3 +1,4 @@
+var et;
 window.onload= function(){
     console.log("in onload");
     this.getGF();
@@ -6,9 +7,10 @@ window.onload= function(){
     document.getElementById("vgFormSubmit").addEventListener("click",postVG,false);
     
 
-//    document.getElementById("eType").addEventListener("change",calculateRP,false);
-//    document.getElementById("tFees").addEventListener("change",calculateRP,false);
+ //   document.getElementById("event").addEventListener("change",calculateRP,false);
+   // document.getElementById("cost").addEventListener("change",calculateRP,false);
 }
+
 function getGF(){
     console.log("in getGF");
     //let vgid=document.getElementById("vgIDInput").value;
@@ -38,7 +40,7 @@ function getET(){
         console.log("in ORSC"+xhr.readyState);
         if(xhr.readyState==4 && xhr.status==200){
             console.log(xhr.responseText);
-            var et=JSON.parse(xhr.responseText);
+             et=JSON.parse(xhr.responseText);
             loadET(et);
         }
     }
@@ -52,7 +54,20 @@ function loadET(et){
     }
 }
 
-
+//function calculateRP(){
+//    var cost = document.getElementById("cost").value;
+//    console.log(cost);
+//    var sel = document.getElementById("event");
+//    if(sel.value != 0){
+//    	console.log(sel.value);
+//        var percent = et[(sel.value)-1].eventPercentage;
+//        console.log(percent);
+//        var pr = ((cost*percent)/100);
+//        console.log(pr);
+//
+//        document.getElementById("projectedReimbursement").value = pr;
+//    }
+//}
 
 
 function jsonBuilder(){
