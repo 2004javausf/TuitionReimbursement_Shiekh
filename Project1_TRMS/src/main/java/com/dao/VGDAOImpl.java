@@ -12,6 +12,7 @@ import com.beans.Event;
 import com.beans.Form;
 import com.beans.Grading;
 import com.beans.Login;
+import com.beans.MySupervisor;
 import com.util.ConnFactory;
 
 public class VGDAOImpl {
@@ -116,5 +117,19 @@ public class VGDAOImpl {
 		conn.close();
 		return loginList;
 		
+	}
+	
+	public  List<MySupervisor> getMySupervisor(int id) throws SQLException {
+		MySupervisor mySupervisor = null;
+		List<MySupervisor> mySupervisorList = new ArrayList<MySupervisor>();
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("SELECT * FROM MYSUPERVISOR WHERE EMPLOYEE_ID="+id);
+		while(rs.next()) {
+			mySupervisor=new MySupervisor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4));
+			mySupervisorList.add(mySupervisor);
+		}
+		conn.close();
+		return mySupervisorList;
 	}
 }

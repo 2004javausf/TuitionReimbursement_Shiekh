@@ -1,6 +1,9 @@
+var emp;
 window.onload= function(){
 	console.log("in login load");
-
+//	console.log(emp.employeeID);
+//	 document.getElementById("id").value=emp.employeeID;
+//	 document.getElementById("name").value=emp.employeeName;
 	this.getLogin();
 	
 	
@@ -16,7 +19,7 @@ function getLogin(){
         console.log("in ORSC"+xhr.readyState);
         if(xhr.readyState==4 && xhr.status==200){
             console.log(xhr.responseText);
-           var emp=JSON.parse(xhr.responseText);
+            emp=JSON.parse(xhr.responseText);
             console.log(emp);
             getRequests(emp);
             loadLogin(emp);
@@ -29,7 +32,6 @@ function getLogin(){
 
 function loadLogin(emp){
 	
-	var emp = emp;
 	console.log(emp);
 
     document.getElementById("eID").innerHTML=emp.employeeID;
@@ -94,3 +96,24 @@ function loadTable(er){
         divShowData.appendChild(table);
 }
 
+
+//function getSupervisor(){
+//    console.log("in get supervisor");
+//  let formID=emp.employeeID;
+//    //let vgid=document.getElementById("vgIDInput").value;
+//    var xhr = new XMLHttpRequest();
+//    xhr.onreadystatechange=function(){
+//        console.log("in ORSC"+xhr.readyState);
+//        if(xhr.readyState==4 && xhr.status==200){
+//            console.log(xhr.responseText);
+//             supervisor=JSON.parse(xhr.responseText);
+//            loadSupervisor(supervisor);
+//        }
+//    }
+//    xhr.open("GET","http://localhost:8080/Project1_TRMS/vg"+formID,true);
+//    xhr.send();
+//}
+//function loadSupervsior(supervisor){
+//	console.log(supervisor.length);
+//    
+//}

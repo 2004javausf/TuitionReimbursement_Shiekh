@@ -11,10 +11,11 @@
 	
 	<div>
 		<form enctype="application/json" method="POST" id="vgForm" action="vg.html">
-		Employee ID: <input type="text" name="formID" placeholder="Enter your ID">
+		Employee ID: <input type="text" id="id" name="formID" placeholder="Enter your ID" readonly>
 		<br>
-		Name: <input type="text" name="empName" placeholder="Enter your Name">
+		Name: <input type="text" id="name" name="empName" placeholder="Enter your Name" readonly>
 		<br>
+		
 		Date: <input type="date" name="date">
 		<br>
 		Cost: <input type="number" id="cost" name="cost">
@@ -35,5 +36,6 @@
 		</form>
 	</div>
 		<script type="text/javascript" src="vg.js"></script>
+		
 </body>
 </html>

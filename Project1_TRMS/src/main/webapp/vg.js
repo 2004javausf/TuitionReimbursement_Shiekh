@@ -1,9 +1,11 @@
 var et;
+var emp;
 window.onload= function(){
     console.log("in onload");
+    this.getLogin();
     this.getGF();
     this.getET();
-  
+    
     document.getElementById("vgFormSubmit").addEventListener("click",postVG,false);
     
 
@@ -53,6 +55,48 @@ function loadET(et){
         document.getElementById("event").options[i+1] = new Option(et[i].eventType,et[i].eventType);
     }
 }
+function getLogin(){
+    console.log("in getLogin");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange=function(){
+        console.log("in ORSC"+xhr.readyState);
+        if(xhr.readyState==4 && xhr.status==200){
+            console.log(xhr.responseText);
+            emp=JSON.parse(xhr.responseText);
+            console.log(emp);
+            loadLogin(emp);
+        }
+    }
+    xhr.open("GET","http://localhost:8080/Project1_TRMS/login",true);
+
+    xhr.send();
+}
+function loadLogin(emp){
+	console.log(emp.employeeID);
+	document.getElementById("id").value=emp.employeeID;
+	document.getElementById("name").value=emp.employeeName;
+}
+//function getSupervisor(){
+//console.log("in get supervisor");
+//let formID=emp.employeeID;
+////let vgid=document.getElementById("vgIDInput").value;
+//var xhr = new XMLHttpRequest();
+//xhr.onreadystatechange=function(){
+//  console.log("in ORSC"+xhr.readyState);
+//  if(xhr.readyState==4 && xhr.status==200){
+//      console.log(xhr.responseText);
+//       supervisor=JSON.parse(xhr.responseText);
+//      loadSupervisor(supervisor);
+//  }
+//}
+//xhr.open("GET","http://localhost:8080/Project1_TRMS/vg"+formID,true);
+//xhr.send();
+//}
+//function loadSupervsior(supervisor){
+//console.log(supervisor.length);
+//
+//}
 
 //function calculateRP(){
 //    var cost = document.getElementById("cost").value;
