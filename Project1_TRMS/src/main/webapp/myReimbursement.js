@@ -1,42 +1,8 @@
 var emp;
 window.onload= function(){
 	console.log("in login load");
-	 document.getElementById("acceptRequest").addEventListener("click",postInfo,false);
-//	console.log(emp.employeeID);
-//	 document.getElementById("id").value=emp.employeeID;
-//	 document.getElementById("name").value=emp.employeeName;
 	this.getLogin();
-//	 document.getElementById("vgFormSubmit").addEventListener("click",postVG,false);	
-    
-		function jsonBuilder(){
-		    var elements= document.getElementById("acceptForm").elements;
-		    var obj={};
-		    for(var i=0; i<elements.length-1;i++){
-		        var item=elements.item(i);
-		        obj[item.name]=item.value;
-		        console.log(obj);
-		    }
-		    var json=JSON.stringify(obj);
-		    console.log(json);
-		    return json;
-		}
-
-		function postInfo(){
-		    console.log("in post Info");
-		 
-		    var xhr= new XMLHttpRequest();
-		    xhr.onreadystatechange= function(){
-		        console.log( "in ORSC "+xhr.readyState);
-		        if(xhr.readyState==4 && xhr.status==200){
-		            console.log(xhr.responseText);
-		        }
-		    }
-		    xhr.open("POST","http://localhost:8080/Project1_TRMS/accept",true);
-		    var payload=jsonBuilder();
-		    xhr.send(payload);
-		}
-	}
-
+}
 function getLogin(){
     console.log("in getLogin");
 
@@ -55,16 +21,6 @@ function getLogin(){
 
     xhr.send();
 }
-
-//function loadLogin(emp){
-//	
-//	console.log(emp);
-//
-//    document.getElementById("eID").innerHTML=emp.employeeID;
-//   document.getElementById("fname").innerHTML=emp.employeeName;
-//
-//
-//}
 function getRequests(emp){
 	console.log(emp.employeeID);
 console.log("in get requests");
@@ -80,7 +36,7 @@ xhrr.onreadystatechange= function(){
       loadTable(fm);
   }
 }
-xhrr.open("GET","http://localhost:8080/Project1_TRMS/grs?formID="+formID ,true);
+xhrr.open("GET","http://localhost:8080/Project1_TRMS/myform?formID="+formID ,true);
 
 xhrr.send();
 }
@@ -130,27 +86,3 @@ function loadTable(er){
         divShowData.appendChild(table);
    
 }
-
-
-
-
-//function getSupervisor(){
-//    console.log("in get supervisor");
-//  let formID=emp.employeeID;
-//    //let vgid=document.getElementById("vgIDInput").value;
-//    var xhr = new XMLHttpRequest();
-//    xhr.onreadystatechange=function(){
-//        console.log("in ORSC"+xhr.readyState);
-//        if(xhr.readyState==4 && xhr.status==200){
-//            console.log(xhr.responseText);
-//             supervisor=JSON.parse(xhr.responseText);
-//            loadSupervisor(supervisor);
-//        }
-//    }
-//    xhr.open("GET","http://localhost:8080/Project1_TRMS/vg"+formID,true);
-//    xhr.send();
-//}
-//function loadSupervsior(supervisor){
-//	console.log(supervisor.length);
-//    
-//}

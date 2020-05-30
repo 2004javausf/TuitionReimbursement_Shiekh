@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>View Reimbursements</title>
+<style>
+	th, td, p, input, h3 {
+		font:15px 'Segoe UI';
+	}
+	table, th, td {
+		border: solid 1px #ddd;
+		border-collapse: collapse;
+		padding: 3px 10px ;
+		text-align: center;
+	}
+	th {
+		font-weight:bold;
+	}
+</style>
+</head>
+<body>
+<p id='showData'></p>
+<form action="supervisor.html" id="acceptForm">
+ Employee ID: <input type="text" name="empID" id="empID" placeholder="Enter Employee ID">
+	<input type="submit" name="acceptRequest" id="acceptRequest" value="Accept Request">
+</form>
+<script type="text/javascript" src="requests.js"></script>
+
+</body>
+</html>

@@ -79,4 +79,34 @@
     <servlet-name>LoginPass</servlet-name>
     <url-pattern>/pass</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AcceptRequestServlet</display-name>
+    <servlet-name>AcceptRequestServlet</servlet-name>
+    <servlet-class>com.servlet.AcceptRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AcceptRequestServlet</servlet-name>
+    <url-pattern>/accept</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMyForm</display-name>
+    <servlet-name>GetMyForm</servlet-name>
+    <servlet-class>com.servlet.GetMyForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMyForm</servlet-name>
+    <url-pattern>/myform</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewHodReimbursement</display-name>
+    <servlet-name>ViewHodReimbursement</servlet-name>
+    <servlet-class>com.servlet.ViewHodReimbursement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewHodReimbursement</servlet-name>
+    <url-pattern>/hodreimbursement</url-pattern>
+  </servlet-mapping>
 </web-app>

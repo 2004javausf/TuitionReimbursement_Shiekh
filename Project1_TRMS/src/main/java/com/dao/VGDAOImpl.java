@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.beans.AcceptForm;
 import com.beans.Event;
 import com.beans.Form;
 import com.beans.Grading;
@@ -49,7 +50,39 @@ public class VGDAOImpl {
 		 Connection conn=banana.getConnection();
 			Statement stmt=conn.createStatement();
 			System.out.println(id);
-			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE SUPERVISOR_ID="+id);
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE STATUS='Pending' AND SUPERVISOR_ID="+id);
+			Form s=null;
+			while(rs.next()) { 
+			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
+			requestList.add(s);
+	}
+			System.out.println(requestList);
+			conn.close();
+		return requestList;
+	}
+	
+	public List<Form> getHODReimbursementList(int id) throws Exception {
+		 List<Form> requestList= new ArrayList<Form>();
+		 Connection conn=banana.getConnection();
+			Statement stmt=conn.createStatement();
+			System.out.println(id);
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE STATUS='Approved by Supervisor' OR SUPERVISOR_ID="+id);
+			Form s=null;
+			while(rs.next()) { 
+			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
+			requestList.add(s);
+	}
+			System.out.println(requestList);
+			conn.close();
+		return requestList;
+	}
+	
+	public List<Form> getMyFormList(int id) throws Exception {
+		 List<Form> requestList= new ArrayList<Form>();
+		 Connection conn=banana.getConnection();
+			Statement stmt=conn.createStatement();
+			System.out.println(id);
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID="+id);
 			Form s=null;
 			while(rs.next()) { 
 			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
@@ -146,5 +179,19 @@ public class VGDAOImpl {
 		}
 		return mySupervisor;
 	
+	}
+	public void insertFormAccept(AcceptForm f) throws SQLException{
+		int employeeID= f.getEmpID();
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Supervisor' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		conn.close();
+	}
+	public void insertFormAcceptHOD(AcceptForm f) throws SQLException{
+		int employeeID= f.getEmpID();
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Head Of Department' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		conn.close();
 	}
 }

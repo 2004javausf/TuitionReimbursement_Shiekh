@@ -31,7 +31,7 @@ window.onload= function(){
 		            console.log(xhr.responseText);
 		        }
 		    }
-		    xhr.open("POST","http://localhost:8080/Project1_TRMS/accept",true);
+		    xhr.open("POST","http://localhost:8080/Project1_TRMS/event",true);
 		    var payload=jsonBuilder();
 		    xhr.send(payload);
 		}
@@ -80,7 +80,7 @@ xhrr.onreadystatechange= function(){
       loadTable(fm);
   }
 }
-xhrr.open("GET","http://localhost:8080/Project1_TRMS/grs?formID="+formID ,true);
+xhrr.open("GET","http://localhost:8080/Project1_TRMS/hodreimbursement?formID="+formID ,true);
 
 xhrr.send();
 }
