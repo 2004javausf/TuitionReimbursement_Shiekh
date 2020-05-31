@@ -14,6 +14,7 @@ function getLogin(){
             emp=JSON.parse(xhr.responseText);
             console.log(emp);
             getRequests(emp);
+            getStatus(emp);
 //            loadLogin(emp);
         }
     }
@@ -39,6 +40,28 @@ xhrr.onreadystatechange= function(){
 xhrr.open("GET","http://localhost:8080/Project1_TRMS/myform?formID="+formID ,true);
 
 xhrr.send();
+}
+function getStatus(emp){
+	console.log(emp.employeeID);
+	console.log("in get requests");
+	let formID=emp.employeeID;
+	//let formID=document.getElementById("requestForm").value;
+	var	xhrr= new XMLHttpRequest();
+	xhrr.onreadystatechange= function(){
+	  console.log( "in ORSC "+xhrr.readyState);
+	  if(xhrr.readyState==4 && xhrr.status==200){
+	      console.log(xhrr.responseText);
+	      var fm= JSON.parse(xhrr.responseText);
+	      console.log(fm);
+	      loadStatus(fm);
+	  }
+	}
+	xhrr.open("GET","http://localhost:8080/Project1_TRMS/status?formID="+formID ,true);
+
+	xhrr.send();
+	}
+function loadStatus(er){
+	console.log(er.status);
 }
 function loadTable(er){
     var col = [];
@@ -87,6 +110,10 @@ function loadTable(er){
                else {
                tabCell.innerHTML = er[i][col[j]];
                }
+           	if(j==8){
+           		var st=er[i][col[j]];
+           		console.log(st);
+           	}
             }
         }
 
@@ -94,5 +121,22 @@ function loadTable(er){
         var divShowData = document.getElementById('showData');
         divShowData.innerHTML = "";
         divShowData.appendChild(table);
+        
+        for (var i = 0; i < er.length; i++) {
+            for (var j = 0; j < col.length; j++) {
+            	if(j==10){
+               		var stat=er[i][col[j]];
+               		console.log(stat);
+               	}
+            }
+        }
+        if(st=='You need to upload your Grades to get Reimbursement Amount'){
+        	
+        }
    
+        var para = document.createElement("p");
+        var node = document.createTextNode(st);
+        para.appendChild(node);
+        var element = document.getElementById("showStatus");
+        element.appendChild(para);
 }

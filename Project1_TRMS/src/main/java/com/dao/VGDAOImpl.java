@@ -107,7 +107,21 @@ public class VGDAOImpl {
 			conn.close();
 		return requestList;
 	}
-	
+	public List<Form> getStatus(int id) throws Exception {
+		 List<Form> requestList= new ArrayList<Form>();
+		 Connection conn=banana.getConnection();
+			Statement stmt=conn.createStatement();
+			System.out.println(id);
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID="+id);
+			Form s=null;
+			while(rs.next()) { 
+			s= new Form(rs.getString(7));  
+			requestList.add(s);
+	}
+			System.out.println(requestList);
+			conn.close();
+		return requestList;
+	}
 	public void insertForm(Form f) throws SQLException{
 		int mySupervisor= getSupervisorID(f.getFormID());
 		Connection conn= banana.getConnection();
@@ -230,7 +244,7 @@ public class VGDAOImpl {
 		int employeeID= f.getEmpID();
 		Connection conn = banana.getConnection();
 		Statement stmt=conn.createStatement();
-		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Benco',MESSAGE='No Additional Document Required as of now.' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Benco',MESSAGE='You need to upload your Grades to get Reimbursement Amount' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
 		conn.close();
 	}
 	public void insertFormRejectBenco(AcceptForm f) throws SQLException{

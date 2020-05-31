@@ -119,4 +119,14 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetStatus</display-name>
+    <servlet-name>GetStatus</servlet-name>
+    <servlet-class>com.servlet.GetStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetStatus</servlet-name>
+    <url-pattern>/status</url-pattern>
+  </servlet-mapping>
 </web-app>

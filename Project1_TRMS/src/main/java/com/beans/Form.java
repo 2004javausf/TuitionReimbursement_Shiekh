@@ -84,6 +84,13 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 		this.gradingFormat = gradingFormat;
 		this.event = event;
 	}
+	
+
+
+	public Form(String status) {
+		super();
+		this.status = status;
+	}
 
 
 	public String getStatus() {
