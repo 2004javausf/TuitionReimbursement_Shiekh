@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>View Reimbursements</title>
+<title>View Reimbursements BENCO</title>
 <style>
 	th, td, p, input, h3 {
 		font:15px 'Segoe UI';
 	}
 	table, th, td {
-		border: solid 1px BLACK;
+		border: solid 1px bLACK;
 		border-collapse: collapse;
 		padding: 3px 10px ;
 		text-align: center;
@@ -16,7 +16,7 @@
 	th {
 		font-weight:bold;
 	}
-	input[type=text], select {
+input[type=text], select {
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -78,23 +78,23 @@ label
 color: BLACK;
 font-weight: bold;
 }
+
 </style>
 </head>
 <body>
 <h2>HERE YOU CAN ACCEPT OR REJECT A REQUEST
 <button class = "btn logout" type="button" onclick="document.location = 'logout'">Logout</button></h2>
 <p id='showData'></p>
-<form action="supervisor.html" id="acceptForm">
+<form action="Benco.html" id="acceptForm">
 <label for="empID">EMPLOYEE ID</label><br><input type="text" name="empID" id="empID" placeholder="Enter Employee ID">
 	<input type="submit" name="acceptRequest" id="acceptRequest" value="Accept Request">
 </form>
-<br><br>
-<form action="supervisor.html" id="rejectForm">
+<form action="Benco.html" id="rejectForm">
  <label for="empID">EMPLOYEE ID</label><br><input type="text" name="empID" id="empID" placeholder="Enter Employee ID"><br>
-  <label for="message">REJECTION REASON</label><br><input type="text" name="message" id="reason" placeholder="Why do you want to reject the request" required>
+ <label for="message">REJECTION REASON</label><br><input type="text" name="message" id="message" placeholder="why do you want to reject" required>
 	<input type="submit" name="rejectRequest" id="rejectRequest" value="Reject Request">
 </form>
-<script type="text/javascript" src="requests.js"></script>
+<script type="text/javascript" src="viewReimbursementBenco.js"></script>
 
 </body>
 </html>

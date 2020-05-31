@@ -1,7 +1,7 @@
 var et;
 var emp;
 window.onload= function(){
-    console.log("in onload");
+	
     this.getLogin();
     this.getGF();
     this.getET();

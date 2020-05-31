@@ -10,17 +10,18 @@ public class Form {
 	private int cost;
 	private String gradingFormat;
 	private String event;
-	private double projectedReimbursement;
 	private String description;
 	private String justification;
 	private String status;
+	private String message;
+	private double projectedReimbursement;
 	
 	public Form() {
 		super();
 	}
 	
 	
-public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String description,String justification,double projectedReimbursement) {
+	public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String status,String description,String justification,String message ) {
 		super();
 		this.formID = formID;
 		this.empName = empName;
@@ -28,9 +29,12 @@ public Form(int formID, String empName, Date date, int cost, String gradingForma
 		this.cost = cost;
 		this.gradingFormat = gradingFormat;
 		this.event = event;
+		this.status= status;
 		this.description = description;
 		this.justification = justification;
-		this.projectedReimbursement = projectedReimbursement;
+		this.message = message;
+		
+//		this.projectedReimbursement = projectedReimbursement;
 	}
 public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String status,String description,String justification ) {
 	super();
@@ -46,7 +50,18 @@ public Form(int formID, String empName, Date date, int cost, String gradingForma
 	
 //	this.projectedReimbursement = projectedReimbursement;
 }
-
+public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String description,String justification,double projectedReimbursement) {
+	super();
+	this.formID = formID;
+	this.empName = empName;
+	this.date = date;
+	this.cost = cost;
+	this.gradingFormat = gradingFormat;
+	this.event = event;
+	this.description = description;
+	this.justification = justification;
+	this.projectedReimbursement = projectedReimbursement;
+}
 
 
 public Form(String empName, Date date, int cost, String gradingFormat, String event) {
@@ -101,14 +116,7 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 		this.date = date;
 	}
 	
-	public double getProjectedReimbursement() {
-		return projectedReimbursement;
-	}
-
-
-	public void setProjectedReimbursement(double projectedReimbursement) {
-		this.projectedReimbursement = projectedReimbursement;
-	}
+	
 	
 	public int getCost() {
 		return cost;
@@ -147,6 +155,24 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 	}
 	public void setEvent(String event) {
 		this.event = event;
+	}
+
+	public double getProjectedReimbursement() {
+		return projectedReimbursement;
+	}
+
+
+	public void setProjectedReimbursement(double projectedReimbursement) {
+		this.projectedReimbursement = projectedReimbursement;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 

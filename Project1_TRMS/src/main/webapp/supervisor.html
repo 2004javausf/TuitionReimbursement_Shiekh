@@ -4,30 +4,34 @@
 <meta charset="ISO-8859-1">
 <title>Direct Supervisor</title>
 <style>
-	th, td, p, input, h3 {
-		font:15px 'Segoe UI';
-	}
-	table, th, td {
-		border: solid 1px #ddd;
-		border-collapse: collapse;
-		padding: 3px 10px ;
-		text-align: center;
-	}
-	th {
-		font-weight:bold;
-	}
+input[type=submit] {
+  width: 100%;
+  background-color: #AAAAAA;
+  color: white;
+  padding: 55px ;
+  margin: 1px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+	font-size: 25px;
+}
+
 </style>
 </head>
 <body>
 	<form action="vg.html">
-		<button name="Reimbursement Form">Reimbursement Form</button>
+		<input type="submit" name="Reimbursement Form"value="GET FORM">
 		</form>
-		<br><br>
+		<br>
 		<form action="viewReimbursements.html">
-		<button name="viewReimbursement">View Reimbursement</button>
+		<input type="submit" name="viewReimbursement"value="VIEW APPLIED REIMBURSEMENTS">
 		</form>
-		<br><br>
- 
+		<br>
+		<form action="viewMyForm.html">
+		<input type="submit" name="reimbursementForm" value="MY SUBMITTED REIMBURSEMENT FORM">
+		</form>
+		<br>
+			<input  type="submit" onclick="document.location = 'logout'" VALUE="LOGOUT">
 
 
 </body>

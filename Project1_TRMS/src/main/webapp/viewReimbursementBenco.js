@@ -2,7 +2,7 @@ var emp;
 window.onload= function(){
 	console.log("in login load");
 	 document.getElementById("acceptRequest").addEventListener("click",postInfo,false);
-	 document.getElementById("rejectRequest").addEventListener("click",postReject,false);
+	 document.getElementById("rejectRequest").addEventListener("click",postRejectBenco,false);
 //	console.log(emp.employeeID);
 //	 document.getElementById("id").value=emp.employeeID;
 //	 document.getElementById("name").value=emp.employeeName;
@@ -32,38 +32,39 @@ window.onload= function(){
 		            console.log(xhr.responseText);
 		        }
 		    }
-		    xhr.open("POST","http://localhost:8080/Project1_TRMS/accept",true);
+		    xhr.open("POST","http://localhost:8080/Project1_TRMS/grading",true);
 		    var payload=jsonBuilder();
 		    xhr.send(payload);
 		}
-		function jsonBuilderReject(){
-			
-		    var elements= document.getElementById("rejectForm").elements;
-		    var obj={};
-		    for(var i=0; i<elements.length-1;i++){
-		        var item=elements.item(i);
-		        obj[item.name]=item.value;
-		        console.log(obj);
-		    }
-		    var json1=JSON.stringify(obj);
-		    console.log(json1);
-		    return json1;
-		}
+	
+function jsonBuilderReject(){
+	
+    var elements= document.getElementById("rejectForm").elements;
+    var obj={};
+    for(var i=0; i<elements.length-1;i++){
+        var item=elements.item(i);
+        obj[item.name]=item.value;
+        console.log(obj);
+    }
+    var json1=JSON.stringify(obj);
+    console.log(json1);
+    return json1;
+}
 
-		function postReject(){
-		    console.log("in post reject");
-		 
-		    var xhr= new XMLHttpRequest();
-		    xhr.onreadystatechange= function(){
-		        console.log( "in ORSC "+xhr.readyState);
-		        if(xhr.readyState==4 && xhr.status==200){
-		            console.log(xhr.responseText);
-		        }
-		    }
-		    xhr.open("POST","http://localhost:8080/Project1_TRMS/hodreimbursement",true);
-		    var payload1=jsonBuilderReject();
-		    xhr.send(payload1);
-		}
+function postRejectBenco(){
+    console.log("in post reject");
+ 
+    var xhr= new XMLHttpRequest();
+    xhr.onreadystatechange= function(){
+        console.log( "in ORSC "+xhr.readyState);
+        if(xhr.readyState==4 && xhr.status==200){
+            console.log(xhr.responseText);
+        }
+    }
+    xhr.open("POST","http://localhost:8080/Project1_TRMS/myform",true);
+    var payload1=jsonBuilderReject();
+    xhr.send(payload1);
+}
 
 function getLogin(){
     console.log("in getLogin");
@@ -108,7 +109,7 @@ xhrr.onreadystatechange= function(){
       loadTable(fm);
   }
 }
-xhrr.open("GET","http://localhost:8080/Project1_TRMS/grs?formID="+formID ,true);
+xhrr.open("GET","http://localhost:8080/Project1_TRMS/accept?formID="+formID ,true);
 
 xhrr.send();
 }
@@ -144,7 +145,6 @@ function loadTable(er){
             tr = table.insertRow(-1);
 
             for (var j = 0; j < col.length-2; j++) {
-            	
             	var tabCell = tr.insertCell(-1);
 //              	 if (j==6){
 //               		continue;

@@ -66,7 +66,7 @@ public class VGDAOImpl {
 		 Connection conn=banana.getConnection();
 			Statement stmt=conn.createStatement();
 			System.out.println(id);
-			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE STATUS='Approved by Supervisor' OR SUPERVISOR_ID="+id);
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE STATUS='Approved by Supervisor' OR SUPERVISOR_ID="+id+"AND NOT STATUS ='Approved by Head Of Department' AND NOT STATUS='Approved by Benco' AND NOT STATUS='Rejected by Head Of Department' AND NOT STATUS='Rejected by Benco'");
 			Form s=null;
 			while(rs.next()) { 
 			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
@@ -76,7 +76,22 @@ public class VGDAOImpl {
 			conn.close();
 		return requestList;
 	}
-	
+
+	public List<Form> getBencoReimbursementList(int id) throws Exception {
+		 List<Form> requestList= new ArrayList<Form>();
+		 Connection conn=banana.getConnection();
+			Statement stmt=conn.createStatement();
+			System.out.println(id);
+			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE STATUS='Approved by Head Of Department' OR SUPERVISOR_ID="+id+"AND NOT STATUS ='Approved by Supervisor' AND NOT STATUS='Approved by Benco' AND NOT STATUS='Rejected by Benco'");
+			Form s=null;
+			while(rs.next()) { 
+			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
+			requestList.add(s);
+	}
+			System.out.println(requestList);
+			conn.close();
+		return requestList;
+	}
 	public List<Form> getMyFormList(int id) throws Exception {
 		 List<Form> requestList= new ArrayList<Form>();
 		 Connection conn=banana.getConnection();
@@ -85,7 +100,7 @@ public class VGDAOImpl {
 			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID="+id);
 			Form s=null;
 			while(rs.next()) { 
-			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));  
+			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(11));  
 			requestList.add(s);
 	}
 			System.out.println(requestList);
@@ -184,14 +199,46 @@ public class VGDAOImpl {
 		int employeeID= f.getEmpID();
 		Connection conn = banana.getConnection();
 		Statement stmt=conn.createStatement();
-		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Supervisor' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Supervisor',MESSAGE='No Additional Document Required as of now.' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		conn.close();
+	}
+	
+	public void insertFormReject(AcceptForm f) throws SQLException{
+		int employeeID= f.getEmpID();
+		String message=f.getMessage();
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Rejected by Supervisor',MESSAGE='"+message+"' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
 		conn.close();
 	}
 	public void insertFormAcceptHOD(AcceptForm f) throws SQLException{
 		int employeeID= f.getEmpID();
 		Connection conn = banana.getConnection();
 		Statement stmt=conn.createStatement();
-		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Head Of Department' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Head Of Department',MESSAGE='No Additional Document Required as of now.' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		conn.close();
+	}
+	public void insertFormRejectHOD(AcceptForm f) throws SQLException{
+		int employeeID= f.getEmpID();
+		String message=f.getMessage();
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Rejected by Head Of Department',MESSAGE='"+message+"' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		conn.close();
+	}
+	public void insertFormAcceptBenco(AcceptForm f) throws SQLException{
+		int employeeID= f.getEmpID();
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Approved by Benco',MESSAGE='No Additional Document Required as of now.' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		conn.close();
+	}
+	public void insertFormRejectBenco(AcceptForm f) throws SQLException{
+		int employeeID= f.getEmpID();
+		String message=f.getMessage();
+		Connection conn = banana.getConnection();
+		Statement stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("UPDATE REIMBURSE SET STATUS='Rejected by Benco',MESSAGE='"+message+"' WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
 		conn.close();
 	}
 }

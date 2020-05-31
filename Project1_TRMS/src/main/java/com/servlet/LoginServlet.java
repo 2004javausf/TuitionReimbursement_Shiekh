@@ -106,7 +106,7 @@ public class LoginServlet extends HttpServlet {
 			else if(l==4) {
 				HttpSession session=request.getSession();
 				session.setAttribute("login",login);
-				request.getRequestDispatcher("vg.html").include(request, response);
+				request.getRequestDispatcher("Benco.html").include(request, response);
 			}
 			else {
 				pw.print("Sorry, username or password invalid!!!");

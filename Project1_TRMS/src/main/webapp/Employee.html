@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+input[type=submit] {
+  width: 100%;
+  background-color: #AAAAAA;
+  color: white;
+  padding: 80px ;
+  margin: 1px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+	font-size: 30px;
+}
+
+</style>
 <meta charset="ISO-8859-1">
 <title>EMPLOYEE</title>
 </head>
 <body>
 		<form action="vg.html">
 		<input type="submit" name="reimbursementForm" value="Reimbursement Form">
-		</form>
+		</form><BR>
 		<form action="viewMyForm.html">
 		<input type="submit" name="reimbursementForm" value="MY REIMBURSEMENT FORM">
-		</form>
+		</form><BR>
+		<input  type="submit" onclick="document.location = 'logout'" VALUE="LOGOUT">
 		
 </body>
 </html>

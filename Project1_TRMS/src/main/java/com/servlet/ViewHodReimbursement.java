@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.beans.AcceptForm;
 import com.dao.VGDAOImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,11 +45,21 @@ public class ViewHodReimbursement extends HttpServlet {
 		pw.flush();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		System.out.println("in doPost reject");
+		AcceptForm vg=null;
+		ObjectMapper mapper=new ObjectMapper();
+		vg=mapper.readValue(request.getInputStream(),AcceptForm.class);
+		System.out.println(vg);
+		VGDAOImpl vgdi=new VGDAOImpl();
+		try {
+			vgdi.insertFormReject(vg);
+			PrintWriter pw=response.getWriter();
+			pw.write("<h3>Added A Request</h3>");
+			pw.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

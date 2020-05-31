@@ -2,6 +2,7 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -53,6 +54,7 @@ public class VGServlet extends HttpServlet {
 		System.out.println(vg);
 		VGDAOImpl vgdi=new VGDAOImpl();
 		try {
+			
 			vgdi.insertForm(vg);
 			PrintWriter pw=response.getWriter();
 			pw.write("<h3>Added A Request</h3>");

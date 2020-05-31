@@ -2,12 +2,13 @@ var emp;
 window.onload= function(){
 	console.log("in login load");
 	 document.getElementById("acceptRequest").addEventListener("click",postInfo,false);
+	 document.getElementById("rejectRequest").addEventListener("click",postReject,false);
 //	console.log(emp.employeeID);
 //	 document.getElementById("id").value=emp.employeeID;
 //	 document.getElementById("name").value=emp.employeeName;
 	this.getLogin();
 //	 document.getElementById("vgFormSubmit").addEventListener("click",postVG,false);	
-    
+}
 		function jsonBuilder(){
 		    var elements= document.getElementById("acceptForm").elements;
 		    var obj={};
@@ -35,7 +36,34 @@ window.onload= function(){
 		    var payload=jsonBuilder();
 		    xhr.send(payload);
 		}
-	}
+function jsonBuilderReject(){
+			
+		    var elements= document.getElementById("rejectForm").elements;
+		    var obj={};
+		    for(var i=0; i<elements.length-1;i++){
+		        var item=elements.item(i);
+		        obj[item.name]=item.value;
+		        console.log(obj);
+		    }
+		    var json1=JSON.stringify(obj);
+		    console.log(json1);
+		    return json1;
+		}
+
+		function postReject(){
+		    console.log("in post reject");
+		 
+		    var xhr= new XMLHttpRequest();
+		    xhr.onreadystatechange= function(){
+		        console.log( "in ORSC "+xhr.readyState);
+		        if(xhr.readyState==4 && xhr.status==200){
+		            console.log(xhr.responseText);
+		        }
+		    }
+		    xhr.open("POST","http://localhost:8080/Project1_TRMS/grs",true);
+		    var payload1=jsonBuilderReject();
+		    xhr.send(payload1);
+		}
 
 function getLogin(){
     console.log("in getLogin");
@@ -101,12 +129,13 @@ function loadTable(er){
         // Create table header row using the extracted headers above.
         var tr = table.insertRow(-1);                   // table row.
 
-        for (var h = 0; h < col.length; h++) {
-        	if (h==6){
-        		continue;
-        	}
+        for (var h = 0; h < col.length-2; h++) {
+//        	if (h==6){
+//        		continue;
+//        	}
             var th = document.createElement("th");      // table header.
             th.innerHTML = col[h];
+            console.log(col[h]);
             tr.appendChild(th);
         }
 
@@ -115,12 +144,21 @@ function loadTable(er){
 
             tr = table.insertRow(-1);
 
-            for (var j = 0; j < col.length; j++) {
-            	if (j==6){
-            		continue;
-            	}
-                var tabCell = tr.insertCell(-1);
+            for (var j = 0; j < col.length-2; j++) {
+            	 var tabCell = tr.insertCell(-1);
+//            	 if (j==6){
+//             		continue;
+//             	}
+            	if(j==2){
+                	var d = er[i][col[j]];
+                	var date = new Date(d).toLocaleDateString();
+                	console.log(date);
+                	tabCell.innerHTML = date;
+                }
+
+                else {
                 tabCell.innerHTML = er[i][col[j]];
+                }
             }
         }
 

@@ -16,6 +16,68 @@
 	th {
 		font-weight:bold;
 	}
+	input[type=text], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=datetime-local] {
+  width: 50%;
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=number] {
+  width: 50%;
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 1px 20px 20px 350px;
+}
+	body{
+	margin: auto;
+  width: 50%;
+	color: BLACK;
+	background-color: #DDDDDD;
+  border-radius: 5px;
+}
+label
+{
+color: BLACK;
+font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -23,6 +85,11 @@
 <form action="hod.html" id="acceptForm">
  Employee ID: <input type="text" name="empID" id="empID" placeholder="Enter Employee ID">
 	<input type="submit" name="acceptRequest" id="acceptRequest" value="Accept Request">
+</form><br>
+<form action="supervisor.html" id="rejectForm">
+ Employee ID: <input type="text" name="empID" id="empID" placeholder="Enter Employee ID" required><br>
+  Reason For Rejection <input type="text" name="message" id="message" placeholder="why do you want to reject" required>
+	<input type="submit" name="rejectRequest" id="rejectRequest" value="Reject Request">
 </form>
 <script type="text/javascript" src="viewReimbursementHod.js"></script>
 

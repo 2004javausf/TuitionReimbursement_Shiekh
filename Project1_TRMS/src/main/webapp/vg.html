@@ -1,42 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+body {
+  background-color: grey;
+  opacity: 0.8;
+}
+input[type=text], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=datetime-local] {
+  width: 50%;
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=number] {
+  width: 50%;
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+label {
+font-weight: bold;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+body{
+  background-color: #f2f2f2;
+}
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 1px 20px 20px 350px;
+}
+</style>
 <meta charset="ISO-8859-1">
 <title>Reimbursement Form</title>
 </head>
 <body>
-	<div>
-		<h2>Reimbursement Form</h2>
-	</div>
+		<h2 style="text-align: center; background-color: #f2f2f2;">Reimbursement Form<button class = "btn logout" type="button" onclick="document.location = 'logout'">Logout</button></h2>
 	
 	<div>
 		<form enctype="application/json" method="POST" id="vgForm" action="vg.html">
-		Employee ID: <input type="text" id="id" name="formID" placeholder="Enter your ID" readonly>
+		<label for="formID">EMPLOYEE ID</label><br><input type="text" id="id" name="formID" placeholder="Enter your ID" readonly>
 		<br>
-		Name: <input type="text" id="name" name="empName" placeholder="Enter your Name" readonly>
+		<label for="empName">NAME</label><br> <input type="text" id="name" name="empName" placeholder="Enter your Name" readonly>
 		<br>
 		
-		Date: <input type="date" name="date">
+		<label for="date">Date and Time</label><br><input type="datetime-local" id="date" name="date" required>
 		<br>
-		Cost: <input type="number" id="cost" name="cost">
+		<label for="cost">Event Cost</label><br> <input type="number" id="cost" name="cost" required>
 		<br>
-		Grading Format : <select name="gradingFormat" id="gradingFormat">
+		
+		<label for="gradingFormat">GRADING FORMAT</label><br><select name="gradingFormat" id="gradingFormat" required>
                     <option value=0>SELECT</option>
-                  </select><br>
- 		Type of Event : <select name="event" id="event">
+                  </select><br><br>
+ 		<label for="event">EVENT</label> <br><select name="event" id="event" required>
                     <option value=0>SELECT</option>
                   </select>
-                <br>
+                <br><br>
                 
-               Description: <input type="text" name="description" placeholder="Describe your Event">
+       <label for="description">DESCRIPTION</label><br><input type="text" name="description" placeholder="Describe your Event" required>
 		<br>
-		Justification: <input type="text" name="justification" placeholder="Justify your activity">
-		<br>
-		Projected Reimbursement: <input type="text" name="projectedReimbursement" id="projectedReimbursement">
-		<br>
+		<label for="justification">JUSTIFICATION</label><br><input type="text" name="justification" placeholder="Justify your activity" required>
+		<br><br>
+		<label for="projectedReimbursement">Projected Reimbursement</label><br><input type="text" name="projectedReimbursement" id="projectedReimbursement" readonly>
+		<br><br>
 		<input type="submit" name="submitme" id="vgFormSubmit">
 		</form>
 	</div>
+	<button class = "btn logout" type="button" onclick="document.location = 'logout'">Logout</button>
 		<script type="text/javascript" src="vg.js"></script>
 		
 </body>

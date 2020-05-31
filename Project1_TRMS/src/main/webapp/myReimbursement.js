@@ -57,11 +57,12 @@ function loadTable(er){
         // Create table header row using the extracted headers above.
         var tr = table.insertRow(-1);                   // table row.
 
-        for (var h = 0; h < col.length; h++) {
-        	if (h==6){
-        		continue;
-        	}
+        for (var h = 0; h < col.length-1; h++) {
+//        	if (h==6){
+//        		continue;
+//        	}
             var th = document.createElement("th");      // table header.
+            console.log(col[h]);
             th.innerHTML = col[h];
             tr.appendChild(th);
         }
@@ -71,12 +72,21 @@ function loadTable(er){
 
             tr = table.insertRow(-1);
 
-            for (var j = 0; j < col.length; j++) {
-            	if (j==6){
-            		continue;
-            	}
-                var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = er[i][col[j]];
+            for (var j = 0; j < col.length-1; j++) {
+            	var tabCell = tr.insertCell(-1);
+//           	 if (j==6){
+//            		continue;
+//            	}
+           	if(j==2){
+               	var d = er[i][col[j]];
+               	var date = new Date(d).toLocaleDateString();
+               	console.log(date);
+               	tabCell.innerHTML = date;
+               }
+
+               else {
+               tabCell.innerHTML = er[i][col[j]];
+               }
             }
         }
 

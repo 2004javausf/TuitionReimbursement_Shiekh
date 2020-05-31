@@ -12,14 +12,35 @@ import javax.servlet.http.HttpServletResponse;
 import com.beans.AcceptForm;
 import com.beans.Form;
 import com.dao.VGDAOImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class AcceptRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("in doGet REQUESTS");
+		ObjectMapper mapper= new ObjectMapper();
+		VGDAOImpl vgdi= new VGDAOImpl();
+		int id= mapper.readValue(request.getParameter("formID"),Integer.class);
+		PrintWriter pw =response.getWriter();
+		String vgJSON;
+		try {
+			vgJSON=mapper.writeValueAsString(vgdi.getBencoReimbursementList(id));
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			pw.print(vgJSON);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pw.flush();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
