@@ -9,13 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.beans.Form;
 import com.dao.VGDAOImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * Servlet implementation class GetStatus
- */
 public class GetStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,13 +41,23 @@ public class GetStatus extends HttpServlet {
 		}
 		pw.flush();
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("in UPLOAD GRADES SERVLET");
+		Form vg=null;
+		ObjectMapper mapper=new ObjectMapper();
+		vg=mapper.readValue(request.getInputStream(),Form.class);
+		System.out.println(vg);
+		VGDAOImpl vgdi=new VGDAOImpl();
+		try {
+			
+			vgdi.insertGrades(vg);
+			PrintWriter pw=response.getWriter();
+			pw.write("<h3>Added A Request</h3>");
+			pw.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
 	}
-
+	}
 }
+

@@ -14,7 +14,6 @@ function getLogin(){
             emp=JSON.parse(xhr.responseText);
             console.log(emp);
             getRequests(emp);
-            getStatus(emp);
 //            loadLogin(emp);
         }
     }
@@ -41,28 +40,7 @@ xhrr.open("GET","http://localhost:8080/Project1_TRMS/myform?formID="+formID ,tru
 
 xhrr.send();
 }
-function getStatus(emp){
-	console.log(emp.employeeID);
-	console.log("in get requests");
-	let formID=emp.employeeID;
-	//let formID=document.getElementById("requestForm").value;
-	var	xhrr= new XMLHttpRequest();
-	xhrr.onreadystatechange= function(){
-	  console.log( "in ORSC "+xhrr.readyState);
-	  if(xhrr.readyState==4 && xhrr.status==200){
-	      console.log(xhrr.responseText);
-	      var fm= JSON.parse(xhrr.responseText);
-	      console.log(fm);
-	      loadStatus(fm);
-	  }
-	}
-	xhrr.open("GET","http://localhost:8080/Project1_TRMS/status?formID="+formID ,true);
 
-	xhrr.send();
-	}
-function loadStatus(er){
-	console.log(er.status);
-}
 function loadTable(er){
     var col = [];
     console.log(er.length);
@@ -110,7 +88,7 @@ function loadTable(er){
                else {
                tabCell.innerHTML = er[i][col[j]];
                }
-           	if(j==8){
+           	if(j==9){
            		var st=er[i][col[j]];
            		console.log(st);
            	}
@@ -131,12 +109,38 @@ function loadTable(er){
             }
         }
         if(st=='You need to upload your Grades to get Reimbursement Amount'){
+        	 var x = document.createElement("FORM");
+        	  x.setAttribute("id", "myForm");
+        	  document.body.appendChild(x);
+       
+        	  var z = document.createElement("INPUT");
+        	  z.setAttribute("type", "submit");
+        	  z.setAttribute("id", "upload");
+        	  z.setAttribute("name", "upload");
+        	  document.getElementById("myForm").appendChild(z);
+        	  document.getElementById("upload").addEventListener("click", uploadGrade,false);
         	
+//        	  var par = document.createElement("p");
+//            var nod = document.createTextNode("You have been granted a reimbursement of "+stat);
+//            par.appendChild(nod);
+//            var element = document.getElementById("showStat");
+//            element.appendChild(par);
         }
-   
-        var para = document.createElement("p");
-        var node = document.createTextNode(st);
-        para.appendChild(node);
-        var element = document.getElementById("showStatus");
-        element.appendChild(para);
+        if(st=='Your Grades were Satisfactory, Check your Account Balance'){
+        	 var par = document.createElement("p");
+             var nod = document.createTextNode("You have been granted a reimbursement of "+stat);
+             par.appendChild(nod);
+             var element = document.getElementById("showStat");
+             element.appendChild(par);
+        }
+        if(st=='Your Grades were not Satisfactory to award Reimbursement'){
+        	 var para = document.createElement("p");
+             var node = document.createTextNode("We cannot Grant you Any Reimbursement Because Your Grades Weren't Satisfactory");
+             para.appendChild(node);
+             var element = document.getElementById("showStat");
+             element.appendChild(para);
+        }
+}
+function uploadGrade(){
+	window.location.href = 'Grades.html';
 }

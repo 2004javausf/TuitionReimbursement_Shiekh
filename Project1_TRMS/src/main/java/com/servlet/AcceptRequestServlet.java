@@ -44,7 +44,7 @@ public class AcceptRequestServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("in doPost");
+		System.out.println("in POST ACCEPT");
 		AcceptForm vg=null;
 		ObjectMapper mapper=new ObjectMapper();
 		vg=mapper.readValue(request.getInputStream(),AcceptForm.class);

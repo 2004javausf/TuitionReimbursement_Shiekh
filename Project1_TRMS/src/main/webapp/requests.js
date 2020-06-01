@@ -129,7 +129,7 @@ function loadTable(er){
         // Create table header row using the extracted headers above.
         var tr = table.insertRow(-1);                   // table row.
 
-        for (var h = 0; h < col.length-2; h++) {
+        for (var h = 0; h < col.length-3; h++) {
 //        	if (h==6){
 //        		continue;
 //        	}
@@ -143,7 +143,7 @@ function loadTable(er){
 
             tr = table.insertRow(-1);
 
-            for (var j = 0; j < col.length-2; j++) {
+            for (var j = 0; j < col.length-3; j++) {
             	
             	var tabCell = tr.insertCell(-1);
 //              	 if (j==6){

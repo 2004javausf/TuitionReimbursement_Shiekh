@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.beans.AcceptForm;
@@ -100,7 +102,7 @@ public class VGDAOImpl {
 			ResultSet rs=stmt.executeQuery("SELECT * FROM REIMBURSE WHERE REIMBURSE_EMPLOYEE_ID="+id);
 			Form s=null;
 			while(rs.next()) { 
-			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(11));  
+			s= new Form(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(11),rs.getDouble(12));  
 			requestList.add(s);
 	}
 			System.out.println(requestList);
@@ -124,20 +126,46 @@ public class VGDAOImpl {
 	}
 	public void insertForm(Form f) throws SQLException{
 		int mySupervisor= getSupervisorID(f.getFormID());
+		System.out.println(f.getDate());
+		System.out.println(System.currentTimeMillis());
+		long difference=(f.getDate().getTime()-System.currentTimeMillis())/86400000;
+		int days = (int) Math.abs(difference);
+		System.out.println(difference);
+		System.out.println(days);
+		if(difference>7) {
+			Connection conn= banana.getConnection();
+			String sql="INSERT INTO REIMBURSE (REIMBURSE_EMPLOYEE_ID,REIMBURSE_EMPLOYEE_NAME,REIMBURSE_COURSE_DATE,REIMBURSE_COST,REIMBURSE_GRADING_FORMAT,REIMBURSE_EVENT_TYPE,DESCRIPTION,JUSTIFICATION,SUPERVISOR_ID,PROJECTED_REIMBURSEMENT) VALUES(?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement ps= conn.prepareStatement(sql);
+			ps.setInt(1, f.getFormID());
+			ps.setString(2, f.getEmpName());
+			ps.setDate(3, f.getDate());
+			ps.setInt(4, f.getCost());
+			ps.setString(5, f.getGradingFormat());
+			ps.setString(6, f.getEvent());
+			ps.setString(7, f.getDescription());
+			ps.setString(8, f.getJustification());
+			ps.setInt(9, mySupervisor );
+			ps.setDouble(10, f.getProjectedReimbursement());
+			ps.executeUpdate();
+			conn.close();
+		}
+	}
+	public void insertGrades(Form f) throws SQLException{
+		int employeeID=f.getFormID();
+		String grades=f.getGrades();
 		Connection conn= banana.getConnection();
-		String sql="INSERT INTO REIMBURSE (REIMBURSE_EMPLOYEE_ID,REIMBURSE_EMPLOYEE_NAME,REIMBURSE_COURSE_DATE,REIMBURSE_COST,REIMBURSE_GRADING_FORMAT,REIMBURSE_EVENT_TYPE,DESCRIPTION,JUSTIFICATION,SUPERVISOR_ID) VALUES(?,?,?,?,?,?,?,?,?)";
-		PreparedStatement ps= conn.prepareStatement(sql);
-		ps.setInt(1, f.getFormID());
-		ps.setString(2, f.getEmpName());
-		ps.setDate(3, f.getDate());
-		ps.setInt(4, f.getCost());
-		ps.setString(5, f.getGradingFormat());
-		ps.setString(6, f.getEvent());
-		ps.setString(7, f.getDescription());
-		ps.setString(8, f.getJustification());
-		ps.setInt(9, mySupervisor );
-		ps.executeUpdate();
-		conn.close();
+		Statement stmt=conn.createStatement();
+		int i= Integer.parseInt(grades);
+		if(i>79 || grades=="pass" || grades=="B" || grades=="A")
+		{
+			stmt.executeQuery("UPDATE REIMBURSE SET GRADES='"+grades+"',MESSAGE='Your Grades were Satisfactory, Check your Account Balance'  WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		}
+		else {
+			stmt.executeQuery("UPDATE REIMBURSE SET GRADES='"+grades+"',MESSAGE='Your Grades were not Satisfactory to award Reimbursement'  WHERE REIMBURSE_EMPLOYEE_ID="+employeeID);
+		}
+		
+	conn.close();
+		
 	}
 	
 	public  List<Event> getET() throws SQLException {

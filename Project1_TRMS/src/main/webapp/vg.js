@@ -128,8 +128,17 @@ function calculateRP(){
         console.log(percent);
         var pr = ((cost*percent)/100);
         console.log(pr);
-
-        document.getElementById("projectedReimbursement").value = pr;
+        var amount;
+        if(pr>1000){
+        	amount=1000;
+        document.getElementById("projectedReimbursement").value = amount;
+        console.log(amount);
+        }
+        else {
+        	amount=pr;
+        	document.getElementById("projectedReimbursement").value = amount;
+        	console.log(amount);
+        }
     }
 }
 

@@ -15,12 +15,27 @@ public class Form {
 	private String status;
 	private String message;
 	private double projectedReimbursement;
+	private String grades;
 	
 	public Form() {
 		super();
 	}
 	
-	
+	public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String status,String description,String justification,String message,double projectedReimbursement ) {
+		super();
+		this.formID = formID;
+		this.empName = empName;
+		this.date = date;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.event = event;
+		this.status= status;
+		this.description = description;
+		this.justification = justification;
+		this.message = message;
+		
+	this.projectedReimbursement = projectedReimbursement;
+	}
 	public Form(int formID, String empName, Date date, int cost, String gradingFormat, String event,String status,String description,String justification,String message ) {
 		super();
 		this.formID = formID;
@@ -91,7 +106,15 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 		super();
 		this.status = status;
 	}
+	
 
+
+
+	public Form(int formID, String grades) {
+		super();
+		this.formID = formID;
+		this.grades = grades;
+	}
 
 	public String getStatus() {
 		return status;
@@ -182,12 +205,25 @@ public Form(String empName, Date date, int cost, String gradingFormat, String ev
 		this.message = message;
 	}
 
+	
+	public String getGrades() {
+		return grades;
+	}
+
+	public void setGrades(String grades) {
+		this.grades = grades;
+	}
 
 	@Override
 	public String toString() {
 		return "Form [formID=" + formID + ", empName=" + empName + ", date=" + date + ", cost=" + cost
-				+ ", gradingFormat=" + gradingFormat + ", event=" + event + "]";
+				+ ", gradingFormat=" + gradingFormat + ", event=" + event + ", description=" + description
+				+ ", justification=" + justification + ", status=" + status + ", message=" + message
+				+ ", projectedReimbursement=" + projectedReimbursement + "]";
 	}
+
+
+	
 
 
 
