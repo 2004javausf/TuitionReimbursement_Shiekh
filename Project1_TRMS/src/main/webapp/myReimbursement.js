@@ -117,6 +117,7 @@ function loadTable(er){
         	  z.setAttribute("type", "submit");
         	  z.setAttribute("id", "upload");
         	  z.setAttribute("name", "upload");
+        	  z.setAttribute("value", "Upload Grades");
         	  document.getElementById("myForm").appendChild(z);
         	  document.getElementById("upload").addEventListener("click", uploadGrade,false);
         	
